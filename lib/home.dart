@@ -14,7 +14,7 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Counter example with cubit and bloc"),
+        title: const Center(child: Text("Counter App Using Cubit and Bloc")),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Center(
@@ -23,12 +23,13 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
+              style: TextStyle(fontSize: 17),
             ),
             BlocBuilder<CounterBloc, int>(
               builder: (context, state) {
                 return Text(
                   '$state',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.headlineLarge,
                 );
               },
             ),
