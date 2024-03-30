@@ -1,4 +1,6 @@
-import 'package:counter_bloc_cubit/cubit/counter_cubit.dart';
+import 'package:counter_bloc_cubit/bloc/counter_bloc.dart';
+import 'package:counter_bloc_cubit/bloc/counter_event.dart';
+// import 'package:counter_bloc_cubit/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,8 +9,14 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
+    // final counterCubit = BlocProvider.of<CounterCubit>(context);
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Counter example with cubit and bloc"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,8 +24,7 @@ class MyHomePage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            BlocBuilder<CounterCubit, int>(
-              bloc: counterCubit,
+            BlocBuilder<CounterBloc, int>(
               builder: (context, state) {
                 return Text(
                   '$state',
@@ -32,7 +39,8 @@ class MyHomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => counterCubit.increment(),
+            onPressed: () => counterBloc.add(IncrementEvent()),
+            // onPressed: () => counterCubit.increment(),
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
@@ -40,7 +48,8 @@ class MyHomePage extends StatelessWidget {
             height: 10,
           ),
           FloatingActionButton(
-            onPressed: () => counterCubit.decrement(),
+            onPressed: () => counterBloc.add(DecrementEvent()),
+            // onPressed: () => counterCubit.decrement(),
             tooltip: 'Decrement',
             child: const Icon(Icons.minimize_rounded),
           ),
